@@ -41,7 +41,7 @@
 *.dwo
 
 # build
-
+push.sh
 /build
 
 # mac stuff
