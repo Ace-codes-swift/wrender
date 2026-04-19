@@ -9,7 +9,7 @@
 
 
 
-    Copyright (C) 2026  Ace Jones/ATech
+    Copyright © 2026  Ace Jones/ATech
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
