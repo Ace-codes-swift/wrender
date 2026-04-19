@@ -1,8 +1,0 @@
-/Users/atech/Projects/WRender/build/CMakeFiles/WRender.dir
-/Users/atech/Projects/WRender/build/CMakeFiles/edit_cache.dir
-/Users/atech/Projects/WRender/build/CMakeFiles/rebuild_cache.dir
-/Users/atech/Projects/WRender/build/_deps/sdl3-build/CMakeFiles/SDL3-shared.dir
-/Users/atech/Projects/WRender/build/_deps/sdl3-build/CMakeFiles/SDL3_test.dir
-/Users/atech/Projects/WRender/build/_deps/sdl3-build/CMakeFiles/SDL_uclibc.dir
-/Users/atech/Projects/WRender/build/_deps/sdl3-build/CMakeFiles/edit_cache.dir
-/Users/atech/Projects/WRender/build/_deps/sdl3-build/CMakeFiles/rebuild_cache.dir

@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/atech/Projects/WRender/build/cmake_install.cmake",
-		"/Users/atech/Projects/WRender/build/_deps/sdl3-build/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
