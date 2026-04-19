@@ -6,6 +6,8 @@ if "%1"=="-clean" (
     mkdir build
 )
 
+mkdir build
+
 REM Configure with CMake
 cmake -S . -B build
 

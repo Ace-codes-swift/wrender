@@ -3,6 +3,7 @@ if [ "$1" = "-clean" ]; then
   mkdir build
 fi
 
+mkdir build
 
 cmake -S . -B build
 cmake --build build
