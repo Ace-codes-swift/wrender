@@ -1,0 +1,5 @@
+so what to do 
+
+
+
+the omnix engine or other places will send scene data to wrender (running as a background proccess) and when it detects its running as a background proccess 
