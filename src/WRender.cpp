@@ -75,9 +75,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 {
    SDL_RenderClear(renderer);   /* start with a blank canvas. */
 
-   
-    
-  
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);  /* red */
+    SDL_FRect rect = { 10.0f, 10.0f, 100.0f, 100.0f };
+    SDL_RenderFillRect(renderer, &rect);
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);  /* black */
     SDL_RenderPresent(renderer);  /* display the frame */
     return SDL_APP_CONTINUE;
