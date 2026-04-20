@@ -1,13 +1,17 @@
 # WRender 
-###### Pronounced “render” or “wer-render”\
+###### Pronounced “render” or “wur-ender”\
+
+WRender is a 3d realistic scene rendering platform 
 
 
 
 
+# NOTE:
+##### WRender is nowhere being close to done its current state is basicaly a c++ framework template 
 
 
 
-
+# T&C
     Copyright © 2026  Ace Jones/ATech
 
     This program is free software: you can redistribute it and/or modify
