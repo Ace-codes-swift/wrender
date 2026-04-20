@@ -34,6 +34,15 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Pull latest changes first
+echo "Pulling latest changes..."
+git pull --rebase origin main
+
+if [ $? -ne 0 ]; then
+  echo "Error: Pull failed"
+  exit 1
+fi
+
 # Push to remote
 echo "Pushing to remote..."
 git push origin main

@@ -2,4 +2,5 @@ so what to do
 
 
 
-the omnix engine or other places will send scene data to wrender (running as a background proccess) and when it detects its running as a background proccess 
+the omnix engine or other places will send scene data to wrender (running as a background proccess) and when it detects its running as a background proccess (as a "child") it does NOT render a window and instead returns the video or image back to the main program 
+                                                  ⤷ application will send a full scene with values for example it will send lighting position and metadata, scene metadata, and objects with their metadata.

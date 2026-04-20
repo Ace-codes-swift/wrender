@@ -7,8 +7,7 @@ static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 
 SDL_Event event;
-
-
+SDL_Texture* rendertarget;
 
 
 
@@ -23,14 +22,24 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
 
-    if (!SDL_CreateWindowAndRenderer("output", 960, 540, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
+#ifdef WRender_IsDependency
+    // Hidden window + render to texture
+    if (!SDL_CreateWindowAndRenderer("output", 960, 540, SDL_WINDOW_HIDDEN, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
 
-   
+    rendertarget = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 960, 540);
+    SDL_SetRenderTarget(renderer, rendertarget);
+#else
+    // Normal visible window
+    if (!SDL_CreateWindowAndRenderer("output", 960, 540, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
+        SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
+        return SDL_APP_FAILURE;
+    }
+#endif
 
-    return SDL_APP_CONTINUE;  /* carry on with the program! */
+    return SDL_APP_CONTINUE;
 }
 
 /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
@@ -48,7 +57,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
    SDL_RenderClear(renderer);   /* start with a blank canvas. */
 
    
-
+    
   
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);  /* black */
     SDL_RenderPresent(renderer);  /* display the frame */
