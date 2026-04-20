@@ -43,6 +43,7 @@ FetchContent_MakeAvailable(JSON)
 # Always build the core library (no SDL callbacks, no SDL_main)
 add_library(WRenderLib
     src/WRenderCore.cpp
+    src/sceneConfig/*
 )
 
 target_link_libraries(WRenderLib PUBLIC SDL3::SDL3 nlohmann_json::nlohmann_json)
@@ -52,6 +53,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # Standalone → executable (SDL callbacks that call into WRenderLib)
     add_executable(WRender
         src/WRender.cpp
+        src/sceneConfig/*
     )
 
     target_link_libraries(WRender PRIVATE WRenderLib SDL3::SDL3)
