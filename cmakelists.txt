@@ -35,26 +35,26 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(SDL3)
 
+# Always build the core library (no SDL callbacks, no SDL_main)
+add_library(WRenderLib
+    src/WRenderCore.cpp
+)
+
+target_link_libraries(WRenderLib PUBLIC SDL3::SDL3)
+target_include_directories(WRenderLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    # Standalone → executable
+    # Standalone → executable (SDL callbacks that call into WRenderLib)
     add_executable(WRender
         src/WRender.cpp
     )
 
-    target_link_libraries(WRender PUBLIC SDL3::SDL3)
-    target_include_directories(WRender PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    target_link_libraries(WRender PRIVATE WRenderLib SDL3::SDL3)
+    target_include_directories(WRender PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 else()
-    # Used as dependency → library
-    add_library(WRenderLib
-        src/WRender.cpp
-    )
-
-    target_link_libraries(WRenderLib PUBLIC SDL3::SDL3)
-    target_include_directories(WRenderLib PUBLIC include)
-
-    target_compile_definitions(WRenderLib PRIVATE WRender_IsDependency)
-     install(TARGETS WRenderLib
+    # Used as dependency → install the library
+    install(TARGETS WRenderLib
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
         RUNTIME DESTINATION bin
