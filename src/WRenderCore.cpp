@@ -25,13 +25,13 @@ bool WRender_Init(SDL_Renderer* renderer, int width, int height)
         SDL_Log("Couldn't create WRender render target: %s", SDL_GetError());
         return false;
     }
-    SDL_SetRenderTarget(renderer, rendertarget);
     return true;
 }
 
 SDL_AppResult WRender_Iterate(SDL_Renderer* renderer)
 {
     SDL_SetRenderTarget(renderer, rendertarget);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);

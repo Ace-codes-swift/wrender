@@ -55,6 +55,11 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_AppResult result = WRender_Iterate(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    SDL_FRect dst = { 0, 0, 960, 540 };
+    SDL_RenderTexture(renderer, rendertarget, nullptr, &dst);
+
     SDL_RenderPresent(renderer);
 
     return result;
