@@ -57,12 +57,16 @@ bool WRender_Init(SDL_Renderer* renderer, int width, int height)
     return true;
 }
 
-SDL_AppResult WRender_Iterate(SDL_Renderer* renderer, std::ifstream &file, std::string &type)
+SDL_AppResult WRender_Iterate(SDL_Renderer* renderer,
+                              std::ifstream*  file,
+                              std::string*    type,
+                              std::string*    sceneName,
+                              std::string*    specificPath)
 {
-    if (!type.empty()) {
+    if (type && !type->empty()) {
         const auto& types = sceneConfig["sceneTypes"];
-        if (!types.contains(type)) {
-            throw std::runtime_error("Unknown scene type: " + type);
+        if (!types.contains(*type)) {
+            throw std::runtime_error("Unknown scene type: " + *type);
         }
     }
 
