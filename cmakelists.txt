@@ -32,7 +32,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     cpp-ipc
     GIT_REPOSITORY https://github.com/mutouyun/cpp-ipc.git
-    GIT_TAG main
+    GIT_TAG master
 )
 
 
@@ -41,7 +41,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SDL3)
 FetchContent_MakeAvailable(cpp-ipc)
 add_executable(WRender
-    src/main.cpp
+    src/WRender.cpp
 )
 
 target_include_directories(WRender PUBLIC include)
