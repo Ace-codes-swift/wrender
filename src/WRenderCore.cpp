@@ -20,13 +20,29 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 #include <string>
 #include <nlohmann/json.hpp>
 #include <stdexcept>
-#include <algorithm>
 
 SDL_Texture* renderedscene = nullptr;
 
 using json = nlohmann::json;
 
 static json sceneConfig;
+
+static constexpr const char* kSceneTypes = R"({
+ "sceneTypes": {
+    "Omnix": {
+        "ScenePath": "${file}/Game/${SceneName}.xml",
+        "SceneFormat": "xml",
+        "AssetsPath": "${file}/Assets/",
+        "requiresSpecificPath": false
+    },
+    "Unity": {
+        "ScenePath": "${file}",
+        "SceneFormat": "yaml",
+        "AssetsPath": "${SpecificPath}",
+        "requiresSpecificPath": true
+    }
+ }
+})";
 
 bool WRender_Init(SDL_Renderer* renderer, int width, int height)
 {
@@ -36,12 +52,7 @@ bool WRender_Init(SDL_Renderer* renderer, int width, int height)
         return false;
     }
 
-    std::ifstream f("src/sceneConfig/sceneTypes.json");
-    if (!f.is_open()) {
-        SDL_Log("Couldn't open sceneTypes.json");
-        return false;
-    }
-    sceneConfig = json::parse(f);
+    sceneConfig = json::parse(kSceneTypes);
 
     return true;
 }
@@ -50,10 +61,7 @@ SDL_AppResult WRender_Iterate(SDL_Renderer* renderer, std::ifstream &file, std::
 {
     if (!type.empty()) {
         const auto& types = sceneConfig["sceneTypes"];
-        bool found = std::any_of(types.begin(), types.end(), [&](const json& entry) {
-            return entry["type"] == type;
-        });
-        if (!found) {
+        if (!types.contains(type)) {
             throw std::runtime_error("Unknown scene type: " + type);
         }
     }
