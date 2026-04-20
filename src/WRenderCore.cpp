@@ -48,12 +48,14 @@ bool WRender_Init(SDL_Renderer* renderer, int width, int height)
 
 SDL_AppResult WRender_Iterate(SDL_Renderer* renderer, std::ifstream &file, std::string &type)
 {
-    const auto& types = sceneConfig["sceneTypes"];
-    bool found = std::any_of(types.begin(), types.end(), [&](const json& entry) {
-        return entry["type"] == type;
-    });
-    if (!found) {
-        throw std::runtime_error("Unknown scene type: " + type);
+    if (!type.empty()) {
+        const auto& types = sceneConfig["sceneTypes"];
+        bool found = std::any_of(types.begin(), types.end(), [&](const json& entry) {
+            return entry["type"] == type;
+        });
+        if (!found) {
+            throw std::runtime_error("Unknown scene type: " + type);
+        }
     }
 
     
