@@ -20,6 +20,8 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *renderer = nullptr;
+static std::ifstream noFile;
+static std::string noType;
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
@@ -39,6 +41,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
 
+
+
     return SDL_APP_CONTINUE;
 }
 
@@ -52,13 +56,13 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-    SDL_AppResult result = WRender_Iterate(renderer);
+    SDL_AppResult result = WRender_Iterate(renderer, noFile, noType);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_FRect dst = { 0, 0, 960, 540 };
-    SDL_RenderTexture(renderer, rendertarget, nullptr, &dst);
+    SDL_RenderTexture(renderer, renderedscene, nullptr, &dst);
 
     SDL_RenderPresent(renderer);
 

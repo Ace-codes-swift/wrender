@@ -30,17 +30,22 @@ FetchContent_Declare(
     GIT_TAG main
 )
 
-
+FetchContent_Declare(
+    JSON
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+)
 
 
 FetchContent_MakeAvailable(SDL3)
+FetchContent_MakeAvailable(JSON)
 
 # Always build the core library (no SDL callbacks, no SDL_main)
 add_library(WRenderLib
     src/WRenderCore.cpp
 )
 
-target_link_libraries(WRenderLib PUBLIC SDL3::SDL3)
+target_link_libraries(WRenderLib PUBLIC SDL3::SDL3 nlohmann_json::nlohmann_json)
 target_include_directories(WRenderLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)

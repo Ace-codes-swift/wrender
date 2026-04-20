@@ -15,22 +15,51 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 
 #include <SDL3/SDL.h>
 #include "WRender.hpp"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <nlohmann/json.hpp>
+#include <stdexcept>
+#include <algorithm>
 
-SDL_Texture* rendertarget = nullptr;
+SDL_Texture* renderedscene = nullptr;
+
+using json = nlohmann::json;
+
+static json sceneConfig;
 
 bool WRender_Init(SDL_Renderer* renderer, int width, int height)
 {
-    rendertarget = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
-    if (!rendertarget) {
+    renderedscene = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    if (!renderedscene) {
         SDL_Log("Couldn't create WRender render target: %s", SDL_GetError());
         return false;
     }
+
+    std::ifstream f("src/sceneConfig/sceneTypes.json");
+    if (!f.is_open()) {
+        SDL_Log("Couldn't open sceneTypes.json");
+        return false;
+    }
+    sceneConfig = json::parse(f);
+
     return true;
 }
 
-SDL_AppResult WRender_Iterate(SDL_Renderer* renderer)
+SDL_AppResult WRender_Iterate(SDL_Renderer* renderer, std::ifstream &file, std::string &type)
 {
-    SDL_SetRenderTarget(renderer, rendertarget);
+    const auto& types = sceneConfig["sceneTypes"];
+    bool found = std::any_of(types.begin(), types.end(), [&](const json& entry) {
+        return entry["type"] == type;
+    });
+    if (!found) {
+        throw std::runtime_error("Unknown scene type: " + type);
+    }
+
+    
+
+
+    SDL_SetRenderTarget(renderer, renderedscene);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
@@ -44,5 +73,5 @@ SDL_AppResult WRender_Iterate(SDL_Renderer* renderer)
 
 void WRender_Quit()
 {
-    rendertarget = nullptr;
+    renderedscene = nullptr;
 }
