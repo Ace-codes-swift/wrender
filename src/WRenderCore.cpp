@@ -69,10 +69,23 @@ SDL_AppResult WRender_Iterate(SDL_Renderer* renderer,
             throw std::runtime_error("Unknown scene type: " + *type);
         }
     }
-
-    
-
-
+   
+   //Talk To autocomplete assistant
+   //test can you talk here?
+   //im here!
+   //ok just to test what you can do go to WRender.cpp and suggest a comment that says "test"
+   //wow you can do that so your context aware?
+   //yes i am context aware and i can help you with your code.
+   //
+   //
+   //
+   //
+   //
+   //
+   //
+   //
+   //
+   //
     SDL_SetRenderTarget(renderer, renderedscene);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
