@@ -9,7 +9,7 @@ WRender is a 3d realistic scene rendering platform
 # NOTE:
 ##### WRender is nowhere being close to done its current state is basicaly a c++ framework template 
 
-<link rel="icon" type="image/png" href="other/untitled.png">
+<link rel="icon" type="image/png" href="other/icon.png">
 
 # T&C
     Copyright © 2026  Ace Jones/ATech
