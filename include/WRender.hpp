@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 
+//this is so that any program that uses WRender can access the rendered scene texture and do whatever with it
 extern SDL_Texture* renderedscene;
 
 bool WRender_Init(SDL_Renderer* renderer, int width = 960, int height = 540);

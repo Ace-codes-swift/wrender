@@ -29,8 +29,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-
-    if (!SDL_CreateWindowAndRenderer("output", 960, 540, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
+    //99% of the time this program will be used as a background proccess so the this program is only for testing, nothing matters
+    if (!SDL_CreateWindowAndRenderer("output", 1920/2, 1080/2, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -56,10 +56,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 {
     SDL_AppResult result = WRender_Iterate(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    SDL_FRect dst = { 0, 0, 960, 540 };
+    SDL_FRect dst = { 0, 0, 960/2, 540/2 };
     SDL_RenderTexture(renderer, renderedscene, nullptr, &dst);
 
     SDL_RenderPresent(renderer);

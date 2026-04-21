@@ -17,6 +17,9 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 #include <SDL3/SDL.h>
 #include <fstream>
 #include <string>
+#include <glm/glm.hpp>
 
-
-void 3dEngine_Init(SDL_Renderer* renderer,);
+class Engine3D {
+public:
+    void init(SDL_Renderer* renderer);
+};

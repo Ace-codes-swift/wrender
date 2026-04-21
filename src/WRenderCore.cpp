@@ -66,26 +66,16 @@ SDL_AppResult WRender_Iterate(SDL_Renderer* renderer,
     if (type && !type->empty()) {
         const auto& types = sceneConfig["sceneTypes"];
         if (!types.contains(*type)) {
-            throw std::runtime_error("Unknown scene type: " + *type);
+            
+            return SDL_APP_CONTINUE;
         }
     }
    
-   //Talk To autocomplete assistant
-   //test can you talk here?
-   //im here!
-   //ok just to test what you can do go to WRender.cpp and suggest a comment that says "test"
-   //wow you can do that so your context aware?
-   //yes i am context aware and i can help you with your code.
-   //
-   //
-   //
-   //
-   //
-   //
-   //
-   //
-   //
-   //
+//this area will be the future place where everything will be initialized and set up
+
+
+//right now we are just rendering a red rectangle
+
     SDL_SetRenderTarget(renderer, renderedscene);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -100,5 +90,6 @@ SDL_AppResult WRender_Iterate(SDL_Renderer* renderer,
 
 void WRender_Quit()
 {
+    SDL_DestroyTexture(renderedscene);
     renderedscene = nullptr;
 }
