@@ -15,8 +15,6 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 #pragma once
 
 #include <SDL3/SDL.h>
-#include <fstream>
-#include <string>
 #include <glm/glm.hpp>
 
 class Engine3D {

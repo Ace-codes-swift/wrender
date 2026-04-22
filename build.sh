@@ -1,4 +1,17 @@
-if [ "$1" = "-clean" ]; then
+#!/bin/bash
+
+CLEAN=false
+RUN=false
+
+for arg in "$@"; do
+  case "$arg" in
+    -c) CLEAN=true ;;
+    -r)   RUN=true ;;
+    *) echo "Unknown argument: $arg"; exit 1 ;;
+  esac
+done
+
+if $CLEAN; then
   rm -rf build
 fi
 
@@ -7,5 +20,6 @@ mkdir -p build
 cmake -S . -B build
 cmake --build build
 
-./build/WRender
-
+if $RUN; then
+  ./build/WRender
+fi

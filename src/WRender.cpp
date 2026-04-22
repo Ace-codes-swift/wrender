@@ -17,7 +17,7 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "WRender.hpp"
-
+//fun chuck norris programing joke #2: chuck norris can make a code library without a test application
 static SDL_Window *window = nullptr;
 static SDL_Renderer *renderer = nullptr;
 
@@ -29,11 +29,12 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    //99% of the time this program will be used as a background proccess so the this program is only for testing, nothing matters
-    if (!SDL_CreateWindowAndRenderer("output", 1920/2, 1080/2, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
+    //NOTE: 99% of the time this program will be used as a background process so this program is only for testing so the specifics of the window are not important
+    
+    if (!SDL_CreateWindowAndRenderer("WRender Test App", 960, 540, SDL_WINDOW_BORDERLESS, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
-    }
+    } 
 
     if (!WRender_Init(renderer)) {
         return SDL_APP_FAILURE;
@@ -54,12 +55,14 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-    SDL_AppResult result = WRender_Iterate(renderer);
-
+    SDL_AppResult result = WRender_Iterate();
+    //so we can tell the test app bg from the wrender texture apart so it is red
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
-
-    SDL_FRect dst = { 0, 0, 960/2, 540/2 };
+    //this is intended to be 1/2 the rendered size why: i have no clue but it again doesnt matter as this entire script wont be included in the final lib 
+   //TODO: make dynamic resizing of the renderedtexture
+    SDL_FRect dst = { 0, 0, 480.0f, 270.0f };
+  
     SDL_RenderTexture(renderer, renderedscene, nullptr, &dst);
 
     SDL_RenderPresent(renderer);
