@@ -53,12 +53,16 @@ FetchContent_MakeAvailable(SDL3)
 FetchContent_MakeAvailable(JSON)
 FetchContent_MakeAvailable(GLM)
 
+# Collect shader files for IDE visibility (not compiled by the C++ toolchain)
+file(GLOB SHADER_SOURCES shaders/*.hlsl)
+set_source_files_properties(${SHADER_SOURCES} PROPERTIES HEADER_FILE_ONLY TRUE)
+
 # Always build the core library (no SDL callbacks, no SDL_main)
 add_library(WRenderLib
     src/WRenderCore.cpp
     src/3dEngine.cpp
     src/sceneParser.cpp
-    shaders/*.hlsl
+    ${SHADER_SOURCES}
 )
 
 target_link_libraries(WRenderLib PUBLIC SDL3::SDL3-static nlohmann_json::nlohmann_json glm::glm)
