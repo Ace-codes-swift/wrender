@@ -1,0 +1,32 @@
+# Main Configuration
+metadata:
+  name: "Test Game"
+  version: "1.0.0"
+  author: "Test Author"
+
+# Settings
+Scene:
+  StartScene: "Start.xml"
+
+# List Items
+items:
+  - id: 1
+    name: "Item One"
+    enabled: true
+  - id: 2
+    name: "Item Two"
+    enabled: false
+
+# Nested Configuration
+database:
+  host: "localhost"
+  port: 5432
+  credentials:
+    username: "user"
+    password: "pass"
+
+# Arrays
+features:
+  - feature1
+  - feature2
+  - feature3

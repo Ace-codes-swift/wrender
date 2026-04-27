@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <!-- Scene Configuration -->
+  <scene name="2dScene" type="2d">
+    <object name="Player">
+      
+      <positionX>0</positionX>
+      <positionY>0</positionY>
+      
+      <component>
+        <id>Simple2dPlayer</id>
+        <options>
+          <physics>
+            <enabled>true</enabled>
+            <gravity>1</gravity>
+            <jumpForce>15.0</jumpForce>
+          </physics>
+          <movement>
+            <up>W</up>
+            <down>S</down>
+            <left>A</left>
+            <right>D</right>
+            <speed>5.0</speed>
+          </movement>
+          <animations>
+            <idle>Idle1</idle>
+            <walk>Walk1</walk>
+            <run>Run1</run>
+          </animations>
+        </options>
+      </component>
+      <component>
+        <id>SimpleSpriteAnimator</id>
+        <name>Idle1</name>
+        <path type="SpriteSheet" fileType="png">/craftpix-net-626011-free-guns-pack-2-for-main-characters-pixel-art/1 Characters/2 Biker/Idle1.png</path>
+      </component>
+
+      <component>
+        <id>SimpleSpriteAnimator</id>
+        <name>Walk1</name>
+        <path type="SpriteSheet" fileType="png">/craftpix-net-626011-free-guns-pack-2-for-main-characters-pixel-art/1 Characters/1 Biker/Walk1.png</path>
+      </component>
+
+      <component>
+        <id>SimpleSpriteAnimator</id>
+        <name>Run1</name>
+        <path type="SpriteSheet" fileType="png">/craftpix-net-626011-free-guns-pack-2-for-main-characters-pixel-art/1 Characters/2 Biker/Run1.png</path>
+      </component>
+
+      <component>
+        <id>SimpleSpriteAnimator</id>
+        <name>Jump1</name>
+        <path type="SpriteSheet" fileType="png">/craftpix-net-626011-free-guns-pack-2-for-main-characters-pixel-art/1 Characters/2 Biker/Jump1.png</path>
+      </component>
+
+     
+    
+    </object>
+ 
+    <object name="Ground">
+      <component>
+        <id>SpriteRenderer</id>
+        <name>GroundSprite</name>
+        <repeatX>false</repeatX>
+        <repeatY>true</repeatY>
+        <positionX>0</positionX>
+        <positionY>-10</positionY>
+        <collision>true</collision>
+        <path type="Sprite" fileType="png">/Enviroment/1 Tiles/Tile_02.png</path>
+      </component>
+    </object>
+
+  </scene>
+</root>

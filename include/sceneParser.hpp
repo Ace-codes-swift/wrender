@@ -12,22 +12,23 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see https://www.gnu.org/licenses/. */
+
 #pragma once
-
-#include <SDL3/SDL.h>
-#include <string>
+#include <fstream>
 #include <optional>
+#include <string>
+#include <nlohmann/json.hpp>
+#include <stdexcept>
+#include <filesystem>
+#include <iostream>
 
-//this is so that any program that uses WRender can access the rendered scene texture and do whatever with it
-extern SDL_Texture* renderedscene;
+namespace fs = std::filesystem;
+using json = nlohmann::json;
 
-bool WRender_Init(
-    SDL_Renderer*              renderer,
-    int                        width        = 960,
-    int                        height       = 540,
-    std::optional<std::string> filePath     = std::nullopt,
-    std::optional<std::string> type         = std::nullopt,
-    std::optional<std::string> sceneName    = std::nullopt,
-    std::optional<std::string> specificPath = std::nullopt);
-SDL_AppResult WRender_Iterate();
-void WRender_Quit();
+class sceneParser {
+public:
+    static void parseScene(std::optional<std::string> filePath,
+    std::optional<std::string> type,
+    std::optional<std::string> sceneName,
+    std::optional<std::string> specificPath);
+};

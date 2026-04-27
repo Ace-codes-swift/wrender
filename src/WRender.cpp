@@ -17,9 +17,11 @@ along with this program. If not, see https://www.gnu.org/licenses/. */
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "WRender.hpp"
+#include "cpumem_monitor.h"
 //fun chuck norris programing joke #2: chuck norris can make a code library without a test application
 static SDL_Window *window = nullptr;
 static SDL_Renderer *renderer = nullptr;
+static SL::NET::CPUMemMonitor s_monitor;
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
@@ -36,7 +38,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     } 
 
-    if (!WRender_Init(renderer)) {
+    if (!WRender_Init(renderer, 960, 540, "/Users/atech/Library/Application Support/Omnix/Game Files/Game.omnix", std::nullopt, std::nullopt, std::nullopt)) {
         return SDL_APP_FAILURE;
     }
 
@@ -64,6 +66,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_FRect dst = { 0, 0, 480.0f, 270.0f };
   
     SDL_RenderTexture(renderer, renderedscene, nullptr, &dst);
+
+    auto mem = s_monitor.getMemoryUsage();
+    char memText[128];
+    SDL_snprintf(memText, sizeof(memText), "RAM: %s / %s",
+        SL::NET::to_PrettyBytes(mem.PhysicalProcessUsed).c_str(),
+        SL::NET::to_PrettyBytes(mem.PhysicalTotalAvailable).c_str());
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderDebugText(renderer, 10.0f, 10.0f, memText);
 
     SDL_RenderPresent(renderer);
 

@@ -27,6 +27,7 @@ include(FetchContent)
 
 set(SDL_SHARED OFF CACHE BOOL "" FORCE)
 set(SDL_STATIC ON  CACHE BOOL "" FORCE)
+set(SDL_SHADERCROSS_ENABLED ON)
 
 FetchContent_Declare(
     SDL3
@@ -56,6 +57,8 @@ FetchContent_MakeAvailable(GLM)
 add_library(WRenderLib
     src/WRenderCore.cpp
     src/3dEngine.cpp
+    src/sceneParser.cpp
+    shaders/*.hlsl
 )
 
 target_link_libraries(WRenderLib PUBLIC SDL3::SDL3-static nlohmann_json::nlohmann_json glm::glm)
